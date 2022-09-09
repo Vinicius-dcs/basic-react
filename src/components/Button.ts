@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
-    font-size: 40px;
+type ButtonProps = {
+    color: string;
+    small?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+    font-size: ${(props) => props.small ? '15px' : '30px'};
+    background-color: ${(props) => props.color}
 `;

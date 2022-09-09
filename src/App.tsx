@@ -5,9 +5,10 @@ function App() {
 
 	return (
 		<div>
-			<Container>
+			<Container color='black'>
 				Texto do Componente
-				<Button> Clique Aqui </Button>
+				<Button color='#FF0000'> Botão maior </Button>
+				<Button color='#00FF00' small> Botão menor </Button>
 			</Container>
 		</div>
 	);
