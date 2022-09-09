@@ -2,23 +2,27 @@ import { useState } from 'react';
 
 function App() {
 
-	const [number, setNumber] = useState(0)
-
-	const sumCount = () => {
-		setNumber(number + 1)
-	}
-
-	const decreaseCount = () => {
-		setNumber(number - 1)
-	}
+	const [name, setName] = useState('...');
+	const [lastName, setLastName] = useState('');
+	const [age, setAge] = useState('...');
 
 	return (
+
 		<div>
-			<button onClick={sumCount}>+</button>
+
+			<label> Nome: </label>
+			<input type="text" onChange={(event) => {setName(event.target.value)}}></input>
+
+			<label> Sobrenome: </label>
+			<input type="text" onChange={(event) => {setLastName(event.target.value)}}></input>
+
+			<label> Idade: </label>
+			<input type="number" onChange={(event) => {setAge(event.target.value)}}></input>
+
 			<hr />
-			{number}
-			<hr />
-			<button onClick={decreaseCount}>-</button>
+
+			<p>Seu nome é {name} {lastName} e você tem {age} anos.</p>
+
 		</div>
 	);
 }
