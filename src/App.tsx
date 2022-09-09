@@ -6,7 +6,10 @@ function App() {
 	return (
 		<div>
 			<Container color='black'>
-				Texto do Componente
+
+				<a href="" className="link">Link Qualquer</a>
+
+				<span>Texto do Componente</span>
 				<Button color='#FF0000'> Botão maior </Button>
 				<Button color='#00FF00' small> Botão menor </Button>
 			</Container>
