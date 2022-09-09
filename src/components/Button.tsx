@@ -6,7 +6,7 @@ type Props = {
 export const Button = ({ text, clickFn }: Props) => {
 
     const buttonEvent = () => {
-        clickFn("Teste");
+        clickFn("Testee");
     }
 
     return (
