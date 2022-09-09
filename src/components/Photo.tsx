@@ -7,7 +7,7 @@ type Props = {
 
 export const Photo = ({ legend, children }: Props) => {
 
-    {/* Exemplo de fragment: esse sinal <> é o fragment, serve como elemento pai para os elementos abaixo, pois o JSX obriga a utilização de um elemento pai, ou seja, não consigo retornar 2 elementos (a não ser que sejam filhos de algo) no mesmo componente. Pra fazer isso, é utilizado o <></> */}
+    {/* Exemplo fragment: esse sinal <> é o fragment, serve como elemento pai para os elementos abaixo, pois o JSX obriga a utilização de um elemento pai, ou seja, não consigo retornar 2 elementos (a não ser que sejam filhos de algo) no mesmo componente. Pra fazer isso, é utilizado o <></> */}
 
     return (
         <>
