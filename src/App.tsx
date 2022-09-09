@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Button } from './components/Button';
+import { Container } from './components/Container'
+import { Button } from './components/Button'
 
 function App() {
 
-	const [padding, setPadding] = useState(0);
-
 	return (
 		<div>
-			<Button/>
+			<Container>
+				Texto do Componente
+				<Button> Clique Aqui </Button>
+			</Container>
 		</div>
 	);
 
