@@ -1,17 +1,28 @@
-import { Button } from './components/Button';
+import { useState } from 'react';
 
 function App() {
 
-	const buttonAcion = (text: string) => {
+	const [show, setShow] = useState(false);
+	const [buttonText, setButtonText] = useState('Mostrar');
 
-		// Comunicação Filho > Pai (via parâmetro)
-		alert("Frase vindo por parâmetro do elemento filho: " + text)
+	const toggleDiv = () => {
+		show === true ? setShow(false) : setShow(true);
+		toggleTextButton();
 	}
 
-	// Comunicação Pai > Filho (via Props)
+	const toggleTextButton = () => {
+		buttonText === 'Mostrar' ? setButtonText('Esconder') : setButtonText('Mostrar');
+	}
+
 	return (
 		<div>
-			<Button text="Frase vindo do elemento pai (App.tsx) via props" clickFn={buttonAcion} />
+			<button onClick={toggleDiv}>{buttonText}</button>
+
+			{show === true &&
+				<div>
+					Olha a DIV!
+				</div>
+			}
 		</div>
 	);
 }
