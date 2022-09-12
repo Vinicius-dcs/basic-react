@@ -1,13 +1,20 @@
+import { useEffect, useState } from 'react';
+
 function App() {
+	const [name, setName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [fullName, setFullName]= useState('');
+
+	useEffect(() => {
+		setFullName(name + ' ' + lastName)
+	}, [name, lastName])
 
 	return (
-		<div className="bg-blue-300 p-5">
-			<input type="text" placeholder="Digite algo" className="border outline-none border-transparent bg-white p-3 rounded focus:ring-1 focus:ring-blue-700"/>
-			
-			<button className="ml-2 p-3 bg-blue-400 rounded text-white font-bold hover:bg-blue-500">Botão</button>
-			<button className="ml-2 p-3 bg-blue-400 rounded text-white font-bold disabled:opacity-50" disabled>Botão</button>
+		<div className="flex flex-col">
+			<input type="text" placeholder="Digite seu NOME" value={name} onChange={(event) => setName(event.target.value)}/>
+			<input type="text" placeholder="Digite seu SOBRENOME" value={lastName} onChange={(event) => setLastName(event.target.value)}/>
+			<p>Nome Completo: {fullName}</p>
 		</div>
-
 	);
 
 }
