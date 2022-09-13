@@ -1,43 +1,48 @@
-import { useState, useEffect } from 'react';
-import { Movie } from './types/Movie';
-import { useToast } from '@chakra-ui/react'
-import { GridMovies } from './components/GridMovies';
-import { LoadMovies } from './components/LoadMovies';
-import { MoviesAPI } from './api/MoviesAPI';
+import { useReducer } from 'react';
 
-function App() {
+type reducerState = {
+	count: number;
+}
 
-	useEffect(() => {
-		loadMovies();
-	}, [])
+type reducerAction = {
+	type: string;
+}
 
-	const [movies, setMovies] = useState<Movie[]>([]);
-	const [load, setLoad] = useState(true);
-	const toast = useToast()
+const initialState = { count: 0 };
 
-	const loadMovies = async () => {
-		try {
-			setMovies(await MoviesAPI.getAll());
-			setLoad(false);
-		} catch (error) {
-			toast({
-				title: 'Falha Inesperada',
-				description: `Erro ao consultar os filmes: ${error}`,
-				status: 'error',
-				duration: 4000,
-				isClosable: true,
-			})
-			setLoad(false);
-		}
+const reducer = (state: reducerState, action: reducerAction) => {
+	switch (action.type) {
+		case 'ADD':
+			return { ...state, count: state.count + 1 };
+			break;
+		case 'DEL':
+			if(state.count > - 0) {
+				return { ...state, count: state.count - 1 };
+			}
+			break;
+		case 'RESET':
+			return initialState;
+			break;
 	}
 
-	return (
-		<div>
-			{load && <LoadMovies /> }
-			{!load && <GridMovies data={movies}/> }
-		</div>
-	);
+	return state;
+}
 
+function App() {
+	const [state, dispatch] = useReducer(reducer, initialState);
+
+	return (
+		<div className="p-5">
+			Contagem: {state.count}
+
+			<hr />
+
+			<button className="p-2 bg-blue-400 m-3 rounded" onClick={() => dispatch({type: 'ADD'})}>Adicionar</button>
+			<button className="p-2 bg-blue-400 m-3 rounded" onClick={() => dispatch({type: 'DEL'})}>Remover</button>
+			<button className="p-2 bg-blue-400 m-3 rounded" onClick={() => dispatch({type: 'RESET'})}>Resetar</button>
+
+		</div>
+	)
 }
 
 export default App;
