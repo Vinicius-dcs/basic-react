@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Movie } from './types/Movie';
 import { Spinner } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react'
 
 function App() {
 
@@ -10,9 +11,10 @@ function App() {
 
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [load, setLoad] = useState(true);
+	const toast = useToast()
 
-/* 	const loadMovies = () => {
-		fetch('https://api.b7web.com.br/cinema/')
+	/* const loadMovies = () => {
+		fetch('https://api.b7web.com.br/cinema')
 			.then((response) => {
 				return response.json();
 			})
@@ -20,14 +22,35 @@ function App() {
 				setMovies(json);
 				setLoad(false);
 			})
+			.catch((error) => {
+				toast({
+					title: 'Falha Inesperada',
+					description: `Erro ao consultar os filmes: ${error}`,
+					status: 'error',
+					duration: 4000,
+					isClosable: true,
+				})
+				setLoad(false);
+			})
 	} */
 
 	const loadMovies = async () => {
-		let response = await fetch('https://api.b7web.com.br/cinema/');
-		let json = await response.json();
+		try {
+			let response = await fetch('https://api.b7web.com.br/cinema/');
+			let json = await response.json();
 
-		setMovies(json);
-		setLoad(false);
+			setMovies(json);
+			setLoad(false);
+		} catch (error) {
+			toast({
+				title: 'Falha Inesperada',
+				description: `Erro ao consultar os filmes: ${error}`,
+				status: 'error',
+				duration: 4000,
+				isClosable: true,
+			})
+			setLoad(false);
+		}
 	}
 
 	return (
@@ -46,15 +69,20 @@ function App() {
 					</div>
 				</div>
 			}
-			Total de Filmes: {movies.length}
-			<div className="grid grid-cols-6 gap-3">
-				{movies.map((item, index) => (
-					<div key={index}>
-						<img src={item.avatar} alt="" className="w-32 block"/>
-						{item.titulo}
+
+			{!load &&
+				<>
+					Total de Filmes: {movies.length}
+					<div className="grid grid-cols-6 gap-3">
+						{movies.map((item, index) => (
+							<div key={index}>
+								<img src={item.avatar} alt="" className="w-32 block" />
+								{item.titulo}
+							</div>
+						))}
 					</div>
-				))}
-			</div>
+				</>
+			}
 		</div>
 	);
 
