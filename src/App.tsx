@@ -3,6 +3,7 @@ import { About } from './pages/About';
 import { Home } from './pages/Home';
 import { AboutVinicius } from './pages/AboutVinicius';
 import { AboutCosta } from './pages/AboutCosta';
+import { NotFound } from './pages/NotFound';
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route path="/sobre" element={<About />} />
 					<Route path="/sobre/vinicius" element={<AboutVinicius />} />
 					<Route path="/sobre/Costa" element={<AboutCosta />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>
 
