@@ -1,9 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
-import { About } from './pages/About';
-import { Home } from './pages/Home';
-import { AboutItem } from './pages/AboutItem';
-import { NotFound } from './pages/NotFound';
-import { RequireAuth } from './RequireAuth';
+import { MainRoutes } from './routes/MainRoutes';
 
 function App() {
 	return (
@@ -15,15 +10,7 @@ function App() {
 			<hr />
 
 			<div className="py-4">
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/sobre" element={
-						<RequireAuth>
-							<About/>
-						</RequireAuth>} />
-					<Route path="/sobre/:slug" element={<AboutItem />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
+				<MainRoutes/>
 			</div>
 
 			<hr />
